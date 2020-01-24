@@ -18,17 +18,30 @@ app.get("/", function(req, res) {
   res.sendFile(__dirname + "/views/index.html");
 });
 
-app.get("/dateValues/:dateVal",function(req,res,next){
-  var dateVal=req.params.dateVal;
-  var dateFormattingOptions={
-    year:'numeric',
-    month:'long',
-    day:'numeric'
+app.get("/dateValues/:dateVal", function(req, res, next) {
+  var dateVal = req.params.dateVal;
+  var dateFormattingOptions = {
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  };
+  if (isNaN(dateVal)) {
+    var naturalDate = new Date(dateVal);
+    naturalDate = naturalDate.toLocaleDateString(
+      "en-us",
+      dateFormattingOptions
+    );
+    var unixDate = new Date(dateVal).getTime / 1000;
+  } else {
+    var unixDate = dateVal;
+    var naturalDate = new Date(dateVal * 1000);
+    naturalDate = naturalDate.toLocaleDateString(
+      "en-us",
+      dateFormattingOptions
+    );
   }
-  if(isNaN(dateVal){
-     
-     })
-})
+  res.json({ unix: unixDate, natural: naturalDate });
+});
 // your first API endpoint...
 app.get("/api/hello", function(req, res) {
   res.json({ greeting: "hello API" });
