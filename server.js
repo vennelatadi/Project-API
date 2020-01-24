@@ -18,6 +18,17 @@ app.get("/", function(req, res) {
   res.sendFile(__dirname + "/views/index.html");
 });
 
+app.get("/dateValues/:dateVal",function(req,res,next){
+  var dateVal=req.params.dateVal;
+  var dateFormattingOptions={
+    year:'numeric',
+    month:'long',
+    day:'numeric'
+  }
+  if(isNaN(dateVal){
+     
+     })
+})
 // your first API endpoint...
 app.get("/api/hello", function(req, res) {
   res.json({ greeting: "hello API" });
