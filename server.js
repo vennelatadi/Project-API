@@ -5,38 +5,6 @@ var express = require("express");
 var path = require("path");
 var app = express();
 
-var isNumeric = function(input) {
-  return !isNaN(parseFloat(input)) && isFinite(input);
-};
-
-var validMonth = function(month) {
-  switch (month.toLower()) {
-    case "january":
-      break;
-    case "february":
-      break;
-    case "march":
-      break;
-    case "april":
-      break;
-    case "may":
-      break;
-    case "june":
-      break;
-    case "july":
-      break;
-    case "august":
-      break;
-    case "september":
-      break;
-    case "october":
-      break;
-    case "november":
-      break;
-    case "december":
-      break;
-  }
-};
 // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 // so that your API is remotely testable by FCC
 var cors = require("cors");
@@ -44,46 +12,12 @@ app.use(cors({ optionSuccessStatus: 200 })); // some legacy browsers choke on 20
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static("public"));
 // http://expressjs.com/en/starter/basic-routing.html
-var isUnixTimestamp = function(time) {
-  if (isNumeric(time)) {
-    return true;
-  }
-  return false;
-};
-
-var convertTime = function(time) {
-  var isUnix = isUnixTimestamp(time);
-  if (isUnix === undefined) {
-    return { unix: null, natural: null };
-  }
-  if (isUnix) {
-    var date = new Date(parseInt(time));
-    console.log(date);
-    return { unix: time, natural: trimDate(date.toDateString()) };
-  }
-  return { unix: Date.parse(time), natural: time };
-};
-
-var trimDate = function(dateStr) {
-  var i = 0;
-  while (i < dateStr.length && dateStr[i] !== " ") {
-    i++;
-  }
-  i++;
-  return dateStr.substring(i);
-};
 
 app.use(express.static("public"));
 app.get("/", function(req, res) {
   res.sendFile(__dirname + "/views/index.html");
 });
-app.get("/api/timestamp/:data", function(req, res) {
-  if (req.params && Object.keys(req.params).lenghth > 0) {
-    res.send(JSON.stringify(convertTime(req.params.data)));
-  } else {
-    res.sensStatus(400);
-  }
-});
+
 // your first API endpoint...
 app.get("/api/hello", function(req, res) {
   res.json({ greeting: "hello API" });
