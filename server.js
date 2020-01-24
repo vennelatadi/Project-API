@@ -9,7 +9,34 @@ var isNumeric = function(input) {
   return !isNaN(parseFloat(input)) && isFinite(input);
 };
 
-var validMonth=function(month
+var validMonth = function(month) {
+  switch (month.toLower()) {
+    case "january":
+      break;
+    case "february":
+      break;
+    case "march":
+      break;
+    case "april":
+      break;
+    case "may":
+      break;
+    case "june":
+      break;
+    case "july":
+      break;
+    case "august":
+      break;
+    case "september":
+      break;
+    case "october":
+      break;
+    case "november":
+      break;
+    case "december":
+      break;
+  }
+};
 // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 // so that your API is remotely testable by FCC
 var cors = require("cors");
