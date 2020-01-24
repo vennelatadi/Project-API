@@ -15,20 +15,42 @@ app.use(cors({ optionSuccessStatus: 200 })); // some legacy browsers choke on 20
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static("public"));
 // http://expressjs.com/en/starter/basic-routing.html
+var convertTime=function(time){
+  var isUnix=isUnixTimestamp
+}
+
+
+
+var trimDate=function(dateStr){
+  var i=0;
+  while(i<dateStr.length && dateStr[i] !==" ")
+    {
+      i++;
+    }
+  i++;
+  return dateStr.substring(i);
+}
+
+
+
+
+
+app.use(express.static("public"));
 app.get("/", function(req, res) {
   res.sendFile(__dirname + "/views/index.html");
+});
+app.get("/api/timestamp/:data", function(req, res) {
+  if (req.params && Object.keys(req.params).lenghth > 0) {
+    res.send(JSON.stringify(convertTime(req.params.data)));
+  } else {
+    res.sensStatus(400);
+  }
 });
 // your first API endpoint...
 app.get("/api/hello", function(req, res) {
   res.json({ greeting: "hello API" });
 });
 
-
-
-app.use(express.static('public'));
-app.get("/",function(req,res){
-  
-})
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function() {
   console.log("Your app is listening on port " + listener.address().port);
